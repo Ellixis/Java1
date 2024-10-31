@@ -1,0 +1,66 @@
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        short[] z = z();
+        float[] x = x();
+        double[][] dom = pon(z, x);
+    
+        vivod(dom);
+
+    }
+    public static double func1 (double p) {
+        return Math.cbrt(Math.sin(Math.pow(Math.E, p)));
+      }
+    public static double func2 (double p) {
+        return Math.log(Math.pow(Math.tan(Math.cbrt(Math.pow(Math.E, p))),2));
+      }
+    public static double func3 (double p) {
+        return Math.cos(Math.pow(2*Math.pow(Math.tan(p)/2,3),2));
+      }
+
+    public static short[] z() {
+        short[] z = new short[]{2,4,6,8,10,12,14,16,18};
+        return z;
+      }
+    
+    public static float[] x() {
+        Random rand = new Random();
+        float[] x = new float[17];
+    
+        for (int i = 0; i < x.length; i++) {
+          x[i] = rand.nextFloat(-3.0f, 5.0f);
+          // System.out.println(x[i]);
+        }
+        return x;
+      }
+
+    public static double[][] pon (short[] z, float[] x) {
+        double[][] dom = new double[9][17];
+        for (int i = 0; i < z.length; i++) {
+            
+            for (int j = 0; j < x.length; j++) {
+                if (z[i]==6){
+                    dom[i][j] =func1(x[j]);
+                }
+                else if ((z[i]==2) | (z[i]==4) | (z[i]==8) | (z[i]==18)){
+                    dom[i][j] = func2(x[j]);
+
+                }
+                else {
+                    dom[i][j] = func3(x[j]);
+                }
+            }
+        }
+        return dom;
+    }
+    public static void vivod (double[][] dom) {
+        for (int i = 0; i <  9; i++) {
+            for (int j = 0; j < 17; j++) {
+                System.out.print(String.format("%.5f", dom[i][j]) + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+}
